@@ -43,7 +43,7 @@ UserController.createUser = (req, res, next) => {
 UserController.login = (req, res, next) => {
   console.log('inside UserController.login');
   const queryString = 'SELECT * from Users WHERE username = $1';
-  const values= [req.body.username];
+  const values = [req.body.username];
 
   // verify user in User table
   db.query(queryString, values, (err, response) => {
@@ -62,12 +62,29 @@ UserController.login = (req, res, next) => {
     // variable for hashed pw stored in returned user row
     const { hash } = response.rows[0];
 
-    // bcrypt native compare password method
-  })
+    // bcrypt compare password method
+    bcrypt.compare(req.body.password, hash, (err, result) => {
+      if (err) {
+        return next({
+          log: err,
+          message: {
+            err: 'Error in bcrypt middleware. Check log for more information.',
+          },
+        });
+      }
+      // check if given password matches a hashed pw in database
+      if (!result) {
+        return res.json({ errorMessage: 'Incorrect username or password.' });
+      }
+      res.locals.username = req.body.username;
+      return next();
+    });
+  });
 };
 
 UserController.logout = (req, res, next) => {
   // functionality to log user out
+  console.log('made it to UserController.logout');
 };
 
 module.exports = UserController;
