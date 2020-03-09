@@ -5,6 +5,11 @@ require('dotenv').config();
 const app = express();
 const PORT = 3000;
 
+// const UserController = require('./controllers/userController.js');
+// const GroupController = require('./controllers/groupController.js');
+// const OfferController = require('./controllers/offerController.js');
+// const NeedController = require('./controllers/needController.js');
+
 // flow test for incoming requests
 app.use((req, res, next) => {
   console.log(`
@@ -22,6 +27,8 @@ app.use(express.json());
 app.use('/build', (req, res) =>
   res.sendFile(path.resolve(__dirname, '../build/bundle.js')),
 );
+
+// app.use('/user', userController)
 
 // default error handler
 app.use((err, req, res, next) => {
