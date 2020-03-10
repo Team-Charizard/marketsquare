@@ -6,5 +6,3 @@ const createTable = `CREATE TABLE IF NOT EXISTS Groups(
 
 // export query string to be used when server first runs
 module.exports = createTable;
-
-
