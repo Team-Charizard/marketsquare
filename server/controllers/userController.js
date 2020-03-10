@@ -34,7 +34,9 @@ UserController.createUser = (req, res, next) => {
           },
         });
       }
-      console.log(`${res.locals.username} created successfully in databse :-)`);
+      console.log(
+        `${res.locals.username} created successfully in database :-)`,
+      );
       return next();
     });
   });

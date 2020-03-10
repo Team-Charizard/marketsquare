@@ -12,6 +12,10 @@ const pool = new Pool({
   connectionString: PG_URI,
 });
 
+pool.on('connect', () => {
+  console.log('Connected to the database!');
+});
+
 // running our queries to create necessary tables
 pool.query(userTable, err => {
   if (err) console.log(err);
@@ -27,10 +31,6 @@ pool.query(offerTable, err => {
 
 pool.query(needTable, err => {
   if (err) console.log(err);
-});
-
-pool.on('connect', () => {
-  console.log('Connected to the database!');
 });
 
 module.exports = {
