@@ -1,5 +1,5 @@
 // pgsql model for our group database
-const createTable = `CREATE TABLE IF NOT EXISTS Groups(
+const createTable = `CREATE TABLE IF NOT EXISTS Needs(
   id SERIAL PRIMARY KEY,
   group_name VARCHAR NOT NULL
 )`;
