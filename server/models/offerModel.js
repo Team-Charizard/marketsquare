@@ -1,5 +1,5 @@
 // pgsql model for our user database
-const createTable = `CREATE TABLE IF NOT EXISTS Users(
+const createTable = `CREATE TABLE IF NOT EXISTS Offers(
   id SERIAL PRIMARY KEY,
   description VARCHAR NOT NULL,
   user_id VARCHAR NOT NULL,
