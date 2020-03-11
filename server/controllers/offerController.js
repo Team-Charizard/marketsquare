@@ -2,10 +2,16 @@ const db = require('../models/db.js');
 
 const OfferController = {};
 
+/**
+ * TODO What will the form look like for creating the offers?
+ * Will They enter group name and description on a general page or will they be
+ * IN the group already and thus we can use group_id as the parameterized query?
+ */
+
 OfferController.createOffer = (req, res) => {
   console.log('made it to createOffer!');
-  const queryString = 'INSERT INTO Offers (description, username, group_id) VALUES ($1, $2, $3)';
-  const values = [req.body.description, req.body.username, req.body.group_id];
+  const queryString = 'INSERT INTO Offers (description, user_id, group_id) VALUES ($1, $2, $3)';
+  const values = [req.body.description, req.params.id, req.body.group_id];
 
   res.locals.description = req.body.description;
   res.locals.group_name = req.body.group_name;
@@ -16,7 +22,7 @@ OfferController.createOffer = (req, res) => {
       return next({
         log: error,
         message: {
-          'Error in database query. Check log for more information.',
+          err: 'Error in database query. Check log for more information.',
         },
       });
     }
