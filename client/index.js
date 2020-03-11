@@ -6,10 +6,14 @@ import { store } from './store';
 import App from './App.jsx';
 // reminder to get scss or css in here
 import './styles/login.css';
+import { BrowserRouter } from 'react-router-dom';
 
 render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      {' '}
+      <App />{' '}
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );

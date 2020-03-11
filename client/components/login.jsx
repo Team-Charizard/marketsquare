@@ -4,8 +4,9 @@
  */
 
 import React from 'react';
+import auth from './auth';
 
-const Login = () => {
+const Login = props => {
   return (
     <div className='login-container'>
       <div className='login-div'>
@@ -13,7 +14,15 @@ const Login = () => {
         <form className='login-form'>
           <input type='text' placeholder='enter username' />
           <input type='text' placeholder='password' />
-          <button type='button' id='login-button'>
+          <button
+            onClick={() => {
+              auth.login(() => {
+                this.props.history.push('/LandingPage');
+              });
+            }}
+            type='button'
+            id='login-button'
+          >
             Login
           </button>
         </form>
