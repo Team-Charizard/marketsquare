@@ -6,6 +6,7 @@ const app = express();
 const PORT = 3000;
 
 const userRouter = require('./routes/userRouter.js');
+const groupRouter = require('./routes/groupRouter.js');
 
 // flow test for incoming requests
 app.use((req, res, next) => {
@@ -25,8 +26,11 @@ app.use('/build', (req, res) =>
   res.sendFile(path.resolve(__dirname, '../build/bundle.js')),
 );
 
-// direct all user related requeststo the userRouter file
+// direct all user related requests to the userRouter file
 app.use('/user', userRouter);
+
+// direct all group-related requests to the groupRouter file
+app.use('/group', groupRouter);
 
 // default error handler
 app.use((err, req, res, next) => {
@@ -39,6 +43,12 @@ app.use((err, req, res, next) => {
   console.log(errorObj.log);
   console.log(errorObj.message);
   return res.status(errorObj.status).json(errorObj.message);
+});
+
+// catch-all error handler in case someone goes to non-existant route
+app.use((req, res) => {
+  console.log('Error: Route does not exist');
+  return res.sendStatus(404);
 });
 
 app.listen(PORT, () => console.log(`SERVER LISTENING ON ${PORT}`));

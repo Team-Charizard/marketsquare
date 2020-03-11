@@ -20,7 +20,7 @@ UserController.createUser = (req, res, next) => {
     // if no error, create user row in user user table in db
     const queryString =
       'INSERT INTO Users (email, username, hash) VALUES ($1, $2, $3)';
-    const values = [req.body.email, req.body.username, hash];
+    const values = [req.body.email.toLowerCase(), req.body.username, hash];
 
     res.locals.username = req.body.username;
 
@@ -34,7 +34,9 @@ UserController.createUser = (req, res, next) => {
           },
         });
       }
-      console.log(`${res.locals.username} created successfully in databse :-)`);
+      console.log(
+        `${res.locals.username} created successfully in database :-)`,
+      );
       return next();
     });
   });

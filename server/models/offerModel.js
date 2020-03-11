@@ -3,7 +3,7 @@ const createTable = `CREATE TABLE IF NOT EXISTS Users(
   id SERIAL PRIMARY KEY,
   description VARCHAR NOT NULL,
   user_id VARCHAR NOT NULL,
-  group_id VARCHAR NOT NULL
+  group_id VARCHAR NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )`;
 
