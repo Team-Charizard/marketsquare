@@ -1,12 +1,14 @@
 const path = require('path');
 const express = require('express');
 require('dotenv').config();
-
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
 const userRouter = require('./routes/userRouter.js');
 
+// app.use(cors());
+app.use(express.json());
 // flow test for incoming requests
 app.use((req, res, next) => {
   console.log(`
@@ -18,15 +20,13 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(express.json());
+// direct all user related requeststo the userRouter file
+app.use('/user', userRouter);
 
 // where our minified and unglified bundle will go from webpack
 app.use('/build', (req, res) =>
   res.sendFile(path.resolve(__dirname, '../build/bundle.js')),
 );
-
-// direct all user related requeststo the userRouter file
-app.use('/user', userRouter);
 
 // default error handler
 app.use((err, req, res, next) => {
