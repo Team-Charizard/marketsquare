@@ -22,24 +22,19 @@ GroupController.createGroup = (req, res, next) => {
         },
       });
     }
-    console.log(
-      'res.locals.group_id createGroup',
-      response.rows[0].group_admin_id,
-    );
-    console.log('res.locals.user_id createGroup', res.locals.user_id);
     res.locals.group_id = response.rows[0].group_admin_id;
     console.log(`${res.locals.group_name} has been created.`);
+    res.send(`${res.locals.group_name} has been created.`);
     return next();
   });
 };
 
 GroupController.addAdmin = (req, res, next) => {
   console.log('made it to GroupController.addAdmin!');
-  console.log('res.locals.group_id addAdmin', res.locals.group_id);
-  console.log('res.locals.user_id addAdmin', res.locals.user_id);
   const queryString = 'INSERT INTO Members (user_id, group_id) VALUES ($1, $2)';
   const values = [res.locals.user_id, res.locals.group_id];
 
+  // db.query to add the group creator/admin as a member of the group
   db.query(queryString, values, (error, response) => {
     if (error) {
       return next({
@@ -47,7 +42,10 @@ GroupController.addAdmin = (req, res, next) => {
         message: 'Error in database query. Check log for more information',
       });
     }
-    return console.log(
+    console.log(
+      `User_id ${res.locals.user_id} added as member of ${res.locals.group_name}`,
+    );
+    return res.send(
       `User_id ${res.locals.user_id} added as member of ${res.locals.group_name}`,
     );
   });
@@ -72,7 +70,6 @@ GroupController.findMemberId = (req, res, next) => {
       });
     }
     res.locals.user_id = response.rows[0].id;
-    console.log('user_id ', response.rows[0].id);
     return next();
   });
 };
@@ -95,7 +92,6 @@ GroupController.findGroupId = (req, res, next) => {
       });
     }
     res.locals.group_id = response.rows[0].id;
-    console.log('response second query', response.rows[0].id);
     return next();
   });
 };
@@ -127,8 +123,6 @@ GroupController.addMember = (req, res, next) => {
   const queryString = 'INSERT INTO Members (user_id, group_id) VALUES ($1, $2)';
   const values = [res.locals.user_id, res.locals.group_id];
 
-  console.log('values', values);
-
   // db.query to add member's user_id and group_id to Members table
   db.query(queryString, values, (error, response) => {
     if (error) {
@@ -137,10 +131,6 @@ GroupController.addMember = (req, res, next) => {
         message: 'Error in database query. Check log for more information.',
       });
     }
-    // res.locals.group_id = response.rows[0].id;
-    console.log('response addMember', response);
-    console.log('res.locals.user_id', res.locals.user_id);
-    console.log('res.locals.group_id', res.locals.user_id);
     console.log(
       `User with email ${res.locals.email} has been added to ${res.locals.group_name}`,
     );

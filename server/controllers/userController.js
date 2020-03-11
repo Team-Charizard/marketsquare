@@ -7,6 +7,7 @@ const UserController = {};
 
 UserController.createUser = (req, res, next) => {
   console.log('inside UserController.createUser function');
+
   // encrypt pw with bcrypt and save hashed pw in database
   bcrypt.hash(req.body.password, roundsOfSalt, (err, hash) => {
     if (err) {
@@ -37,6 +38,7 @@ UserController.createUser = (req, res, next) => {
       console.log(
         `${res.locals.username} created successfully in database :-)`,
       );
+      res.send(`${res.locals.username} created successfully in database :-)`);
       return next();
     });
   });
@@ -65,10 +67,10 @@ UserController.login = (req, res, next) => {
     const { hash } = response.rows[0];
 
     // bcrypt compare password method
-    bcrypt.compare(req.body.password, hash, (err, result) => {
-      if (err) {
+    bcrypt.compare(req.body.password, hash, (error, result) => {
+      if (error) {
         return next({
-          log: err,
+          log: error,
           message: {
             err: 'Error in bcrypt middleware. Check log for more information.',
           },
