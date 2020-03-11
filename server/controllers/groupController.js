@@ -2,6 +2,44 @@ const db = require('../models/db.js');
 
 const GroupController = {};
 
+GroupController.getOwnedGroups = (req, res, next) => {
+  console.log('made it to getOwnedGroups');
+  const queryString = 'SELECT * FROM Groups WHERE group_admin_id = $1';
+  const values = [req.params.id];
+  // db.query to get list of all groups a member owns
+  db.query(queryString, values, (error, response) => {
+    if (error) {
+      return next({
+        log: error,
+        message: {
+          err: 'Error in database query. Check log for more information',
+        },
+      });
+    }
+    // returns an array of objects to the front-end
+    return res.send(response.rows);
+  });
+};
+
+GroupController.getMemberGroups = (req, res, next) => {
+  console.log('made it to getMemberGroups!');
+  const queryString = 'SELECT * FROM Members WHERE user_id = $1';
+  const values = [req.params.id];
+
+  db.query(queryString, values, (error, response) => {
+    if (error) {
+      return next({
+        log: error,
+        message: {
+          err: 'Error in database query. Check log for more information.',
+        },
+      });
+    }
+    // return an array of objects to the front-end
+    return res.send(response.rows);
+  });
+};
+
 GroupController.createGroup = (req, res, next) => {
   console.log('made it to createGroup!');
   const queryString =
@@ -31,8 +69,13 @@ GroupController.createGroup = (req, res, next) => {
 
 GroupController.addAdmin = (req, res, next) => {
   console.log('made it to GroupController.addAdmin!');
-  const queryString = 'INSERT INTO Members (user_id, group_id) VALUES ($1, $2)';
-  const values = [res.locals.user_id, res.locals.group_id];
+  const queryString =
+    'INSERT INTO Members (user_id, group_id, group_name) VALUES ($1, $2)';
+  const values = [
+    res.locals.user_id,
+    res.locals.group_id,
+    res.locals.group_name,
+  ];
 
   // db.query to add the group creator/admin as a member of the group
   db.query(queryString, values, (error, response) => {
@@ -120,8 +163,13 @@ GroupController.checkIfAlreadyExists = (req, res, next) => {
 
 GroupController.addMember = (req, res, next) => {
   console.log('made it to addMember');
-  const queryString = 'INSERT INTO Members (user_id, group_id) VALUES ($1, $2)';
-  const values = [res.locals.user_id, res.locals.group_id];
+  const queryString =
+    'INSERT INTO Members (user_id, group_id, group_name) VALUES ($1, $2, $3)';
+  const values = [
+    res.locals.user_id,
+    res.locals.group_id,
+    res.locals.group_name,
+  ];
 
   // db.query to add member's user_id and group_id to Members table
   db.query(queryString, values, (error, response) => {
@@ -132,6 +180,9 @@ GroupController.addMember = (req, res, next) => {
       });
     }
     console.log(
+      `User with email ${res.locals.email} has been added to ${res.locals.group_name}`,
+    );
+    res.send(
       `User with email ${res.locals.email} has been added to ${res.locals.group_name}`,
     );
     return next();
