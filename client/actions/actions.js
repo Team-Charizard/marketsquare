@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import * as types from '../constants/actionTypes';
 
 /**
  * need to make these thunks to query the database
  */
 
-export const login = (username, password) => ({
+export const login = username => ({
   type: types.SIGN_IN,
   payload: username,
 });
@@ -20,7 +21,7 @@ const successfulCreateAccount = user => ({
   type: types.SIGN_UP_SUCCESS,
   isFetching: false,
   isAuthenticated: true,
-  id_token: user.id.token,
+  // id_token: user.id.token,
 });
 
 const failedCreateAccount = message => ({
@@ -47,10 +48,10 @@ export const createAccount = credentials => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log('hitting response here', response);
-        dispatch(successfulCreateAccount(response.username));
+        dispatch(successfulCreateAccount(response));
       })
       .catch(err => {
+        console.log('ERROR IN THUNK FETCH:', err);
         dispatch(failedCreateAccount(err.message));
       });
   };
