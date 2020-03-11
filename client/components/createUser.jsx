@@ -2,6 +2,19 @@
 /* eslint-disable react/no-unused-state */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions';
+
+const mapStateToProps = state => ({
+  isFetching: state.auth.isFetching,
+  isAuthenticated: state.auth.isAuthenticated,
+  credentials: state.auth.credentials,
+  id_token: state.auth.id_token,
+});
+
+const mapDispatchToProps = dispatch => ({
+  createAccount: credentials => dispatch(actions.createAccount(credentials)),
+});
 
 class CreateUser extends Component {
   // want to have functionality to grab and change user data
@@ -18,6 +31,15 @@ class CreateUser extends Component {
 
   submitLogin(event) {
     event.preventDefault();
+    const { username, password, email } = this.state;
+    const credentials = {
+      username,
+      password,
+      email,
+    };
+    const { createAccount } = this.props;
+    console.log(this.props);
+    createAccount(credentials);
   }
 
   // sets State to all the values inputted by the user
@@ -32,7 +54,7 @@ class CreateUser extends Component {
       <div className='login-container'>
         <div className='login-div'>
           <h2>MarketSquare Create Account</h2>
-          <form className='login-form' onSubmit={this.onSubmit}>
+          <form className='login-form' onSubmit={this.submitLogin}>
             <input
               name='email'
               type='text'
@@ -61,4 +83,4 @@ class CreateUser extends Component {
   }
 }
 
-export default CreateUser;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);

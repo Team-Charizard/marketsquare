@@ -6,7 +6,6 @@ const roundsOfSalt = 10;
 const UserController = {};
 
 UserController.createUser = (req, res, next) => {
-  console.log('inside UserController.createUser function');
   // encrypt pw with bcrypt and save hashed pw in database
   bcrypt.hash(req.body.password, roundsOfSalt, (err, hash) => {
     if (err) {
