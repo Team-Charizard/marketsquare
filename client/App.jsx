@@ -1,7 +1,7 @@
 import React from 'react';
-import Login from './components/login';
+import Login from './components/Login';
 import MainContainer from './components/MainContainer';
-import CreateUser from './components/createUser';
+import CreateUser from './components/CreateUser';
 
 const App = () => {
   return (

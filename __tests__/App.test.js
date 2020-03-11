@@ -2,8 +2,20 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from '../client/App';
 
-it('Snapshot Test', () => {
-  const wrapper = shallow(<App />);
+describe('App unit tests', () => {
+  let wrapper;
 
-  expect(wrapper).toMatchSnapshot();
+  beforeAll(() => {
+    wrapper = shallow(<App />);
+  });
+
+  it('Snapshot Test', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders a div', () => {
+    console.log(wrapper.debug());
+    expect(wrapper.type()).toEqual('div');
+    expect(wrapper.find('div').length).toEqual(1);
+  });
 });

@@ -50,6 +50,7 @@ class CreateUser extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='login-container'>
         <div className='login-div'>

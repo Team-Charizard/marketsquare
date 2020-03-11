@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login unit tests snapshot test 1`] = `
+<div
+  className="login-container"
+>
+  <div
+    className="login-div"
+  >
+    <h2>
+      MarketSquare Login
+    </h2>
+    <form
+      className="login-form"
+      onSubmit={[Function]}
+    >
+      <input
+        name="username"
+        onChange={[Function]}
+        placeholder="enter username"
+        type="text"
+      />
+      <input
+        name="password"
+        onChange={[Function]}
+        placeholder="password"
+        type="text"
+      />
+      <button
+        id="login-button"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Login unit tests snapshot test 2`] = `
+<div
+  className="login-container"
+>
+  <div
+    className="login-div"
+  >
+    <h2>
+      MarketSquare Login
+    </h2>
+    <form
+      className="login-form"
+      onSubmit={[Function]}
+    >
+      <input
+        name="username"
+        onChange={[Function]}
+        placeholder="enter username"
+        type="text"
+      />
+      <input
+        name="password"
+        onChange={[Function]}
+        placeholder="password"
+        type="text"
+      />
+      <button
+        id="login-button"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+`;
