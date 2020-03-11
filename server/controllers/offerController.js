@@ -2,19 +2,15 @@ const db = require('../models/db.js');
 
 const OfferController = {};
 
-/**
- * TODO What will the form look like for creating the offers?
- * Will They enter group name and description on a general page or will they be
- * IN the group already and thus we can use group_id as the parameterized query?
- */
-
-OfferController.createOffer = (req, res) => {
+OfferController.createOffer = (req, res, next) => {
   console.log('made it to createOffer!');
-  const queryString = 'INSERT INTO Offers (description, user_id, group_id) VALUES ($1, $2, $3)';
-  const values = [req.body.description, req.params.id, req.body.group_id];
+  const queryString =
+    'INSERT INTO Offers (description, username, group_id) VALUES ($1, $2, $3)';
+  const values = [req.body.description, req.body.username, req.params.group_id];
 
   res.locals.description = req.body.description;
-  res.locals.group_name = req.body.group_name;
+  res.locals.group_id = req.params.group_id;
+  res.locals.username = req.body.username;
 
   // db.query to add new offer to the Offers table
   db.query(queryString, values, (error, response) => {
@@ -26,7 +22,12 @@ OfferController.createOffer = (req, res) => {
         },
       });
     }
-    return console.log(`${res.locals.description} was successfully created in ${res.locals.group_name}`);
+    console.log(
+      `${res.locals.description} successfully created in ${res.locals.group_id} by ${res.locals.username}`,
+    );
+    return res.json({
+      message: `${res.locals.description} successfully created in ${res.locals.group_id} by ${res.locals.username}`,
+    });
   });
 };
 

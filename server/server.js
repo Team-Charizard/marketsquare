@@ -8,6 +8,7 @@ const PORT = 3000;
 const userRouter = require('./routes/userRouter.js');
 const groupRouter = require('./routes/groupRouter.js');
 const offerRouter = require('./routes/offerRouter.js');
+const needRouter = require('./routes/needRouter.js');
 
 app.use(express.json());
 // flow test for incoming requests
@@ -29,6 +30,9 @@ app.use('/group', groupRouter);
 
 // direct all offer-related requests to the offerRouter file
 app.use('/offer', offerRouter);
+
+// direct all need-related requests to the needRouter file
+app.use('/need', needRouter);
 
 // where our minified and unglified bundle will go from webpack
 app.use('/build', (req, res) =>
