@@ -2,13 +2,15 @@ const db = require('../models/db.js');
 
 const OfferController = {};
 
-OfferController.createOffer = (req, res) => {
+OfferController.createOffer = (req, res, next) => {
   console.log('made it to createOffer!');
-  const queryString = 'INSERT INTO Offers (description, username, group_id) VALUES ($1, $2, $3)';
-  const values = [req.body.description, req.body.username, req.body.group_id];
+  const queryString =
+    'INSERT INTO Offers (description, username, group_id) VALUES ($1, $2, $3)';
+  const values = [req.body.description, req.body.username, req.params.group_id];
 
   res.locals.description = req.body.description;
-  res.locals.group_name = req.body.group_name;
+  res.locals.group_id = req.params.group_id;
+  res.locals.username = req.body.username;
 
   // db.query to add new offer to the Offers table
   db.query(queryString, values, (error, response) => {
@@ -16,11 +18,16 @@ OfferController.createOffer = (req, res) => {
       return next({
         log: error,
         message: {
-          'Error in database query. Check log for more information.',
+          err: 'Error in database query. Check log for more information.',
         },
       });
     }
-    return console.log(`${res.locals.description} was successfully created in ${res.locals.group_name}`);
+    console.log(
+      `${res.locals.description} successfully created in ${res.locals.group_id} by ${res.locals.username}`,
+    );
+    return res.json({
+      message: `${res.locals.description} successfully created in ${res.locals.group_id} by ${res.locals.username}`,
+    });
   });
 };
 
