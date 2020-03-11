@@ -38,8 +38,8 @@ UserController.createUser = (req, res, next) => {
       console.log(
         `${res.locals.username} created successfully in database :-)`,
       );
-      res.send(`${res.locals.username} created successfully in database :-)`);
-      return next();
+      res.json(res.locals.username);
+      // return next();
     });
   });
 };
