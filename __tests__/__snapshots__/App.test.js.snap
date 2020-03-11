@@ -4,5 +4,6 @@ exports[`Snapshot Test 1`] = `
 <div>
   <Connect(MainContainer) />
   <Login />
+  <Connect(CreateUser) />
 </div>
 `;
