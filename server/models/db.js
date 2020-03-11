@@ -4,6 +4,7 @@ const userTable = require('./userModel.js');
 const groupTable = require('./groupModel.js');
 const offerTable = require('./offerModel.js');
 const needTable = require('./needModel.js');
+const memberTable = require('./memberModel.js');
 
 const { PG_URI } = process.env;
 
@@ -12,6 +13,7 @@ const pool = new Pool({
   connectionString: PG_URI,
 });
 
+// connect to the db via a pool
 pool.on('connect', () => {
   console.log('Connected to the database!');
 });
@@ -30,6 +32,10 @@ pool.query(offerTable, err => {
 });
 
 pool.query(needTable, err => {
+  if (err) console.log(err);
+});
+
+pool.query(memberTable, err => {
   if (err) console.log(err);
 });
 
