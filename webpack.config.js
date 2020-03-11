@@ -4,9 +4,13 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devServer: {
     publicPath: '/build/',
+    port: 8080,
     // add proxy later
     compress: true,
     historyApiFallback: true,
+    proxy: {
+      '/user': 'http://localhost:3000',
+    },
   },
 
   entry: path.resolve(__dirname, './client/index.js'),
