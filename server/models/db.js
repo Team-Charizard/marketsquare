@@ -19,25 +19,25 @@ pool.on('connect', () => {
 });
 
 // running our queries to create necessary tables
-pool.query(userTable, err => {
-  if (err) console.log(err);
-});
+// pool.query(userTable, err => {
+//   if (err) console.log(err);
+// });
 
-pool.query(groupTable, err => {
-  if (err) console.log(err);
-});
+// pool.query(groupTable, err => {
+//   if (err) console.log(err);
+// });
 
-pool.query(offerTable, err => {
-  if (err) console.log(err);
-});
+// pool.query(offerTable, err => {
+//   if (err) console.log(err);
+// });
 
-pool.query(needTable, err => {
-  if (err) console.log(err);
-});
+// pool.query(needTable, err => {
+//   if (err) console.log(err);
+// });
 
-pool.query(memberTable, err => {
-  if (err) console.log(err);
-});
+// pool.query(memberTable, err => {
+//   if (err) console.log(err);
+// });
 
 module.exports = {
   query: (text, params, callback) => {

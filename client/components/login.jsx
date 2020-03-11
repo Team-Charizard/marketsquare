@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../actions/actions';
 
 class Login extends Component {
@@ -49,9 +50,14 @@ class Login extends Component {
               placeholder='password'
               onChange={this.handleInputChange}
             />
-            <button type='submit' id='login-button'>
-              Login
-            </button>
+            <Link to='/LandingPage'>
+              <button type='submit' id='login-button'>
+                Login
+              </button>
+            </Link>
+            <Link to='/Createuser'>
+              <div> Sign Up</div>
+            </Link>
           </form>
         </div>
       </div>

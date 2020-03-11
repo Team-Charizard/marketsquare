@@ -38,7 +38,7 @@ class CreateUser extends Component {
       email,
     };
     const { createAccount } = this.props;
-    console.log(this.props);
+    console.log('this.props in CREATE USER LOGIN Button:', this.props);
     createAccount(credentials);
   }
 

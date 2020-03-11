@@ -1,14 +1,22 @@
 import React from 'react';
-import Login from './components/Login';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './components/login';
 import MainContainer from './components/MainContainer';
-import CreateUser from './components/CreateUser';
+import LandingPage from './components/LandingPage';
+import CreateUser from './components/createUser';
 
 const App = () => {
   return (
     <div>
-      <MainContainer />
-      <Login />
-      <CreateUser />
+      <Router>
+        <MainContainer />
+        {/* <Login /> */}
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/LandingPage' component={LandingPage} />
+          <Route exact path='/CreateUser' component={CreateUser} />
+        </Switch>
+      </Router>
     </div>
   );
 };

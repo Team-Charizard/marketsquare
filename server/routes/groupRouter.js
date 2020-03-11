@@ -4,6 +4,12 @@ const router = express.Router();
 
 const groupController = require('../controllers/groupController.js');
 
+// functionality to get all groups they are admin of
+router.get('/owned/:id', groupController.getOwnedGroups);
+
+// functionality to get all groups a user is a member of
+router.get('/member/:id', groupController.getMemberGroups);
+
 // functionality for creating a new group
 router.post(
   '/create/:id',
