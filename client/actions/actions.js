@@ -48,11 +48,13 @@ export const createAccount = credentials => {
     })
       .then(response => response.json())
       .then(response => {
-        dispatch(successfulCreateAccount(response));
-      })
-      .catch(err => {
-        console.log('ERROR IN THUNK FETCH:', err);
-        dispatch(failedCreateAccount(err.message));
+        // error if taken username
+        // username sent if correct
+        console.log('response in fetch:', response);
+        if (response.err) dispatch(failedCreateAccount(response.err));
+        else {
+          dispatch(successfulCreateAccount(response));
+        }
       });
   };
 };

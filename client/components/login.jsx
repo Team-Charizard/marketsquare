@@ -9,6 +9,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../actions/actions';
 
+const mapStateToProps = state => ({
+  isFetching: state.auth.isFetching,
+  isAuthenticated: state.auth.isAuthenticated,
+  credentials: state.auth.credentials,
+  id_token: state.auth.id_token,
+});
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -65,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(mapStateToProps, null)(Login);
