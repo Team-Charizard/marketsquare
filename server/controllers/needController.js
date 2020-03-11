@@ -2,6 +2,25 @@ const db = require('../models/db.js');
 
 const NeedController = {};
 
+NeedController.getNeeds = (req, res, next) => {
+  console.log('made it to getNeeds');
+  const queryString = 'SELECT * FROM Needs WHERE group_id = $1';
+  const values = [req.params.group_id];
+
+  // db.query to get all the offers in the given group
+  db.query(queryString, values, (error, response) => {
+    if (error) {
+      return next({
+        log: error,
+        message: {
+          err: 'Error in database query. Check log for more information',
+        },
+      });
+    }
+    return res.json(response.rows);
+  });
+};
+
 NeedController.createNeed = (req, res, next) => {
   console.log('made it to createNeed!');
   const queryString =

@@ -2,6 +2,25 @@ const db = require('../models/db.js');
 
 const OfferController = {};
 
+OfferController.getOffers = (req, res, next) => {
+  console.log('made it to getOffers');
+  const queryString = 'SELECT * FROM Offers WHERE group_id = $1';
+  const values = [req.params.group_id];
+
+  // db.query to get all the offers in the given group
+  db.query(queryString, values, (error, response) => {
+    if (error) {
+      return next({
+        log: error,
+        message: {
+          err: 'Error in database query. Check log for more information',
+        },
+      });
+    }
+    return res.json(response.rows);
+  });
+};
+
 OfferController.createOffer = (req, res, next) => {
   console.log('made it to createOffer!');
   const queryString =
