@@ -11,6 +11,7 @@ const initialState = {
   isAuthenticated: false,
   credentials: null,
   id_token: null,
+  message: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -26,6 +27,7 @@ export const authReducer = (state = initialState, action) => {
         isFetching: true,
         isAuthenticated: false,
         credentials: action.credentials,
+        message: null,
       };
     case SIGN_UP_SUCCESS:
       return {
@@ -33,6 +35,7 @@ export const authReducer = (state = initialState, action) => {
         isFetching: false,
         isAuthenticated: true,
         id_token: action.id_token,
+        message: null,
       };
     case SIGN_UP_FAIL:
       return {

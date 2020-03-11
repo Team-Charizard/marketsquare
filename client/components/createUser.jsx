@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   credentials: state.auth.credentials,
   id_token: state.auth.id_token,
+  message: state.auth.message,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,7 +40,6 @@ class CreateUser extends Component {
       email,
     };
     const { createAccount } = this.props;
-    console.log('this.props in CREATE USER LOGIN Button:', this.props);
     createAccount(credentials);
   }
 
@@ -76,6 +77,7 @@ class CreateUser extends Component {
             <button type='submit' id='login-button'>
               Create Account
             </button>
+            {this.props.message && <p>{this.props.message}</p>}
           </form>
         </div>
       </div>
