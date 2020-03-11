@@ -1,14 +1,13 @@
 const path = require('path');
 const express = require('express');
 require('dotenv').config();
-const cors = require('cors');
+
 const app = express();
 const PORT = 3000;
 
 const userRouter = require('./routes/userRouter.js');
 const groupRouter = require('./routes/groupRouter.js');
 
-// app.use(cors());
 app.use(express.json());
 // flow test for incoming requests
 app.use((req, res, next) => {
@@ -49,9 +48,10 @@ app.use((err, req, res, next) => {
 });
 
 // catch-all error handler in case someone goes to non-existant route
-app.use((req, res) => {
-  console.log('Error: Route does not exist');
-  return res.sendStatus(404);
-});
+// TODO This is getting called even for existing routes
+// app.use((req, res) => {
+//   console.log('Error: Route does not exist');
+//   return res.sendStatus(404);
+// });
 
 app.listen(PORT, () => console.log(`SERVER LISTENING ON ${PORT}`));
