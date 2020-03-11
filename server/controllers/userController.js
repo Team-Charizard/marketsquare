@@ -31,7 +31,7 @@ UserController.createUser = (req, res, next) => {
         return next({
           log: error,
           message: {
-            err: 'Error in database query. Check log for more information.',
+            err: 'Username taken',
           },
         });
       }

@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unused-state */
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = state => ({
@@ -10,6 +12,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   credentials: state.auth.credentials,
   id_token: state.auth.id_token,
+  message: state.auth.message,
+  successfulSignUp: state.auth.successfulSignUp,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,7 +42,6 @@ class CreateUser extends Component {
       email,
     };
     const { createAccount } = this.props;
-    console.log('this.props in CREATE USER LOGIN Button:', this.props);
     createAccount(credentials);
   }
 
@@ -50,6 +53,11 @@ class CreateUser extends Component {
   }
 
   render() {
+    const { successfulSignUp } = this.props;
+    if (successfulSignUp) {
+      return <Redirect to='/' />;
+    }
+
     return (
       <div className='login-container'>
         <div className='login-div'>
@@ -76,6 +84,7 @@ class CreateUser extends Component {
             <button type='submit' id='login-button'>
               Create Account
             </button>
+            {this.props.message && <p>{this.props.message}</p>}
           </form>
         </div>
       </div>
