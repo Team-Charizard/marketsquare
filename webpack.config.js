@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         // rule for css
-        test: /\.scss$/,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
