@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
-import Login from '../client/components/Login';
+import Login from '../client/components/login';
 
 describe('Login unit tests', () => {
   let wrapper;
@@ -11,8 +10,6 @@ describe('Login unit tests', () => {
   });
 
   it('snapshot test', () => {
-    const tree = renderer.create(<Login />).toJSON();
-    expect(tree).toMatchSnapshot();
     expect(wrapper).toMatchSnapshot();
   });
 

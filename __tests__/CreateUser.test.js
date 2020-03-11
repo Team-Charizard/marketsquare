@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CreateUser from '../client/components/CreateUser';
+import CreateUser from '../client/components/createUser';
 
 xdescribe('CreateUser unit tests', () => {
   let wrapper;
@@ -13,15 +13,10 @@ xdescribe('CreateUser unit tests', () => {
   };
 
   beforeAll(() => {
-    wrapper = shallow(<CreateUser {...props} />);
+    wrapper = shallow(<CreateUser />);
   });
 
   it('renders a div with the class name login-container', () => {
-    console.log(wrapper.debug());
     expect(wrapper.find(`.login-container`).length).toEqual(1);
-  });
-
-  it('has props', () => {
-    expect(wrapper.props()).toBe(props);
   });
 });
