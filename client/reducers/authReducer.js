@@ -12,6 +12,7 @@ const initialState = {
   credentials: null,
   id_token: null,
   message: null,
+  successfulSignUp: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -36,6 +37,7 @@ export const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         id_token: action.id_token,
         message: null,
+        successfulSignUp: true,
       };
     case SIGN_UP_FAIL:
       return {

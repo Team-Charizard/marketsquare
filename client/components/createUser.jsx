@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = state => ({
@@ -12,6 +13,7 @@ const mapStateToProps = state => ({
   credentials: state.auth.credentials,
   id_token: state.auth.id_token,
   message: state.auth.message,
+  successfulSignUp: state.auth.successfulSignUp,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -51,6 +53,11 @@ class CreateUser extends Component {
   }
 
   render() {
+    const { successfulSignUp } = this.props;
+    if (successfulSignUp) {
+      return <Redirect to='/' />;
+    }
+
     return (
       <div className='login-container'>
         <div className='login-div'>
