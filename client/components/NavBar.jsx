@@ -2,22 +2,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const NavBar = ({ isLogged }) => (
+export const NavBar = ({ isLogged, logout }) => (
   <nav className='navbar'>
     <Link to='/'>Marketsquare</Link>
     <ul>
       {!isLogged ? (
         [
-          <li>
+          <li key='Login li'>
             <Link to='/'>Login</Link>
           </li>,
-          <li>
+          <li key='Signup li'>
             <Link to='/CreateUser'>Sign Up</Link>
           </li>,
         ]
       ) : (
-        <li>
-          <Link to='/'>Logout</Link>
+        <li key='Logout li'>
+          <button type='button' onClick={logout}>
+            Logout
+          </button>
         </li>
       )}
     </ul>

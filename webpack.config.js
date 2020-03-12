@@ -5,12 +5,11 @@ module.exports = {
   devServer: {
     publicPath: '/build/',
     port: 8080,
-    // add proxy later
     compress: true,
     historyApiFallback: true,
     proxy: {
-      '/user': 'http://localhost:3000',
       '/offer': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
       '/need': 'http://localhost:3000',
       '/group': 'http://localhost:3000',
     },

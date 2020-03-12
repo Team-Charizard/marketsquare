@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-state */
 /**
@@ -7,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import * as actions from '../actions/actions';
 
 const mapStateToProps = state => ({
@@ -52,7 +53,9 @@ class Login extends Component {
   }
 
   render() {
-    return (
+    return this.props.isAuthenticated ? (
+      <Redirect to='/LandingPage' />
+    ) : (
       <div className='login-container'>
         <div className='login-div'>
           <h2>MarketSquare Login</h2>
@@ -65,7 +68,7 @@ class Login extends Component {
             />
             <input
               name='password'
-              type='text'
+              type='password'
               placeholder='password'
               onChange={this.handleInputChange}
             />

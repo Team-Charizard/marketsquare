@@ -6,6 +6,7 @@ import {
   LOG_IN_REQUEST,
   LOG_IN_FAIL,
   LOG_IN_SUCCESS,
+  LOG_OUT,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -56,6 +57,11 @@ export const authReducer = (state = initialState, action) => {
         ...action.payload,
       };
     case LOG_IN_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case LOG_OUT:
       return {
         ...state,
         ...action.payload,

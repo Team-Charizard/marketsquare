@@ -19,15 +19,27 @@ body {
                 font-size: 1rem;
                 padding: 8px;
                 margin: 10px;
+
+                button {
+                    font-size: 1rem;
+                    outline: 0;
+                    background-color: $nav;
+                    border: 0;
+                    cursor: pointer;
+                }
             }
         }
 
-        a {
+        a, button {
             color: white;
             text-decoration: none;
         }
 
         a:hover {
+            text-decoration: underline;
+        }
+
+        button:hover {
             text-decoration: underline;
         }
 
