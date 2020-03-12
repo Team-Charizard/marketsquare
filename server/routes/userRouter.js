@@ -10,7 +10,9 @@ router.post('/register', userController.createUser, (req, res) => {
 });
 
 // funcionality for logging user in
-router.post('/login', userController.login);
+router.post('/login', userController.login, (req, res) => {
+  res.status(200).json(res.locals.username);
+});
 
 // functionality for logging user out
 router.get('/logout', userController.logout);

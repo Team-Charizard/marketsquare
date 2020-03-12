@@ -37,4 +37,4 @@ class GroupContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupContainer);
+export default GroupContainer;

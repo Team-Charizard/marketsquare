@@ -3,6 +3,9 @@ import {
   SIGN_UP_FAIL,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
+  LOG_IN_REQUEST,
+  LOG_IN_FAIL,
+  LOG_IN_SUCCESS,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -33,18 +36,29 @@ export const authReducer = (state = initialState, action) => {
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        isAuthenticated: true,
-        id_token: action.id_token,
-        message: null,
+        ...action.payload,
         successfulSignUp: true,
       };
     case SIGN_UP_FAIL:
       return {
         ...state,
-        isFetching: false,
-        isAuthenticated: false,
+        ...action.payload,
+      };
+    case LOG_IN_REQUEST:
+      return {
+        ...state,
+        credentials: action.credentials,
         message: action.message,
+      };
+    case LOG_IN_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case LOG_IN_FAIL:
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;
