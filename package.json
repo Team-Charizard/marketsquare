@@ -31,7 +31,7 @@
       "enzyme-to-json/serializer"
     ],
     "setupFiles": [
-      "./__tests__/setupEnzyme.test.js"
+      "./setupEnzyme.js"
     ]
   },
   "devDependencies": {

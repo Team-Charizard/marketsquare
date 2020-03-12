@@ -31,7 +31,7 @@ UserController.createUser = (req, res, next) => {
         return next({
           log: error,
           message: {
-            err: 'Error in database query. Check log for more information.',
+            err: 'Username taken',
           },
         });
       }
@@ -63,6 +63,7 @@ UserController.login = (req, res, next) => {
     if (response.rows.length < 1) {
       return res.json({ errorMessage: 'Username or password is incorrect' });
     }
+    console.log('response.rows:', response.rows);
     // variable for hashed pw stored in returned user row
     const { hash } = response.rows[0];
 

@@ -5,9 +5,28 @@ import * as types from '../constants/actionTypes';
  * need to make these thunks to query the database
  */
 
-export const login = username => ({
-  type: types.SIGN_IN,
-  payload: username,
+const requestLoginUser = credentials => ({
+  type: types.LOG_IN_REQUEST,
+  credentials,
+  message: null,
+});
+
+const successfulLogIn = username => ({
+  type: types.LOG_IN_SUCCESS,
+  payload: {
+    isFetching: false,
+    isAuthenticated: true,
+    username,
+  },
+});
+
+const failedLogIn = message => ({
+  type: types.LOG_IN_FAIL,
+  payload: {
+    isFetching: false,
+    isAuthenticated: false,
+    message,
+  },
 });
 
 //
@@ -19,16 +38,20 @@ const requestCreateAccount = credentials => ({
 // add JWT token on successful account creation
 const successfulCreateAccount = user => ({
   type: types.SIGN_UP_SUCCESS,
-  isFetching: false,
-  isAuthenticated: true,
   // id_token: user.id.token,
+  payload: {
+    isFetching: false,
+    isAuthenticated: true,
+  },
 });
 
 const failedCreateAccount = message => ({
   type: types.SIGN_UP_FAIL,
-  isFetching: false,
-  isAuthenticated: false,
-  message,
+  payload: {
+    isFetching: false,
+    isAuthenticated: false,
+    message,
+  },
 });
 
 // thunk that handles all the other createAccount functionality
@@ -48,11 +71,34 @@ export const createAccount = credentials => {
     })
       .then(response => response.json())
       .then(response => {
-        dispatch(successfulCreateAccount(response));
-      })
-      .catch(err => {
-        console.log('ERROR IN THUNK FETCH:', err);
-        dispatch(failedCreateAccount(err.message));
+        // error if taken username
+        // username sent if correct
+        console.log('response in fetch:', response);
+        if (response.err) dispatch(failedCreateAccount(response.err));
+        else {
+          dispatch(successfulCreateAccount(response));
+        }
+      });
+  };
+};
+
+export const loginUser = credentials => {
+  return dispatch => {
+    console.log('credentials in loginDispatch', credentials);
+
+    dispatch(requestLoginUser(credentials));
+
+    fetch('user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.errorMessage) dispatch(failedLogIn(data.errorMessage));
+        else dispatch(successfulLogIn(data));
       });
   };
 };
