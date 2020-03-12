@@ -55,7 +55,7 @@ class CreateUser extends Component {
   render() {
     const { successfulSignUp } = this.props;
     if (successfulSignUp) {
-      return <Redirect to='/' />;
+      return <Redirect to='/LandingPage' />;
     }
 
     return (

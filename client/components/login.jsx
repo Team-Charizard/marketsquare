@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-state */
 /**
  * @description log in component
@@ -14,6 +15,12 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   credentials: state.auth.credentials,
   id_token: state.auth.id_token,
+  username: state.auth.username,
+  message: state.auth.message,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: credentials => dispatch(actions.loginUser(credentials)),
 });
 
 class Login extends Component {
@@ -28,8 +35,14 @@ class Login extends Component {
   }
 
   submitLogin(event) {
-    console.log(event);
     event.preventDefault();
+    const { username, password } = this.state;
+    const credentials = {
+      username,
+      password,
+    };
+    const { loginUser } = this.props;
+    loginUser(credentials);
   }
 
   handleInputChange(event) {
@@ -57,11 +70,9 @@ class Login extends Component {
               placeholder='password'
               onChange={this.handleInputChange}
             />
-            <Link to='/LandingPage'>
-              <button type='submit' id='login-button'>
-                Login
-              </button>
-            </Link>
+            <button type='submit' id='login-button'>
+              Login
+            </button>
             <Link to='/Createuser'>
               <div> Sign Up</div>
             </Link>
@@ -72,4 +83,4 @@ class Login extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
