@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import * as actions from '../actions/actions';
 import styles from '../styles/group.css';
-
-// const mapStateToProps = state => ({});
-
-// const mapDispatchToProps = dispatch => ({
-//   // login: (email, username, password) => dispatch(actions.login(email, username, password)),
-// });
 
 class Group extends Component {
   constructor(props) {
@@ -19,7 +11,7 @@ class Group extends Component {
   }
 
   componentDidMount() {
-    // runs two fetch requests parallel to add authors and needs arrays to state
+    // runs two fetch requests in parallel to add offers & needs arrays to state
     Promise.all([fetch('/offer/2'), fetch('/need/2')])
       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
       .then(([data1, data2]) =>
@@ -31,13 +23,13 @@ class Group extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // add list items filled with offers to an offers array
     const offers = this.state.offers.map(item => {
       return (
         <li key={item + item.id}>{item.description + ', ' + item.username}</li>
       );
     });
-
+    // add list items filled with needs to needs array
     const needs = this.state.needs.map(item => {
       return (
         <li key={item + item.id}>{item.description + ', ' + item.username}</li>

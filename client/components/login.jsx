@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../actions/actions';
-import Group from './Group.jsx';
 
 const mapStateToProps = state => ({
   isFetching: state.auth.isFetching,
@@ -79,7 +78,6 @@ class Login extends Component {
           </form>
           {this.props.message && <p>{this.props.message}</p>}
         </div>
-        <Group />
       </div>
     );
   }
