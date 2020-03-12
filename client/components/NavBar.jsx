@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const NavBar = ({ isLogged }) => (
+export const NavBar = ({ isLogged, logout }) => (
   <nav className='navbar'>
     <Link to='/'>Marketsquare</Link>
     <ul>
@@ -17,7 +17,9 @@ export const NavBar = ({ isLogged }) => (
         ]
       ) : (
         <li>
-          <Link to='/'>Logout</Link>
+          <button type='button' onClick={logout}>
+            Logout
+          </button>
         </li>
       )}
     </ul>

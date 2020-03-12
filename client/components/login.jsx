@@ -68,7 +68,7 @@ class Login extends Component {
             />
             <input
               name='password'
-              type='text'
+              type='password'
               placeholder='password'
               onChange={this.handleInputChange}
             />

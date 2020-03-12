@@ -102,3 +102,11 @@ export const loginUser = credentials => {
       });
   };
 };
+
+export const logoutUser = () => ({
+  type: types.LOG_OUT,
+  payload: {
+    isAuthenticated: false,
+    credentials: null,
+  },
+});
