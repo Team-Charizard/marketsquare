@@ -10,6 +10,9 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       '/user': 'http://localhost:3000',
+      '/offer': 'http://localhost:3000',
+      '/need': 'http://localhost:3000',
+      '/group': 'http://localhost:3000',
     },
   },
 
