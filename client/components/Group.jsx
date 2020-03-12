@@ -12,7 +12,10 @@ class Group extends Component {
 
   componentDidMount() {
     // runs two fetch requests in parallel to add offers & needs arrays to state
-    Promise.all([fetch('/offer/2'), fetch('/need/2')])
+    Promise.all([
+      fetch(`/offer/${this.props.group_id}`),
+      fetch(`/need/${this.props.group_id}`),
+    ])
       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
       .then(([data1, data2]) =>
         this.setState({
@@ -26,13 +29,13 @@ class Group extends Component {
     // add list items filled with offers to an offers array
     const offers = this.state.offers.map(item => {
       return (
-        <li key={item + item.id}>{item.description + ', ' + item.username}</li>
+        <li key={item + item.id}>{`${item.description  }, ${  item.username}`}</li>
       );
     });
     // add list items filled with needs to needs array
     const needs = this.state.needs.map(item => {
       return (
-        <li key={item + item.id}>{item.description + ', ' + item.username}</li>
+        <li key={item + item.id}>{`${item.description  }, ${  item.username}`}</li>
       );
     });
 
