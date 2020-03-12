@@ -48,6 +48,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         credentials: action.credentials,
+        message: action.message,
       };
     case LOG_IN_SUCCESS:
       return {

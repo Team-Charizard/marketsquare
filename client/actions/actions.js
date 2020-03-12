@@ -8,6 +8,7 @@ import * as types from '../constants/actionTypes';
 const requestLoginUser = credentials => ({
   type: types.LOG_IN_REQUEST,
   credentials,
+  message: null,
 });
 
 const successfulLogIn = username => ({
@@ -46,7 +47,6 @@ const successfulCreateAccount = user => ({
 
 const failedCreateAccount = message => ({
   type: types.SIGN_UP_FAIL,
-
   payload: {
     isFetching: false,
     isAuthenticated: false,
@@ -98,7 +98,7 @@ export const loginUser = credentials => {
       .then(response => response.json())
       .then(data => {
         if (data.errorMessage) dispatch(failedLogIn(data.errorMessage));
-        dispatch(successfulLogIn(data));
+        else dispatch(successfulLogIn(data));
       });
   };
 };

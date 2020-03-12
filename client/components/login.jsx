@@ -52,7 +52,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className='login-container'>
         <div className='login-div'>
@@ -77,6 +76,7 @@ class Login extends Component {
               <div> Sign Up</div>
             </Link>
           </form>
+          {this.props.message && <p>{this.props.message}</p>}
         </div>
       </div>
     );
