@@ -17,6 +17,7 @@ OfferController.getOffers = (req, res, next) => {
         },
       });
     }
+    console.log('OFFERS: ', response.rows);
     return res.json(response.rows);
   });
 };

@@ -8,15 +8,15 @@ export const NavBar = ({ isLogged, logout }) => (
     <ul>
       {!isLogged ? (
         [
-          <li>
+          <li key='Login li'>
             <Link to='/'>Login</Link>
           </li>,
-          <li>
+          <li key='Signup li'>
             <Link to='/CreateUser'>Sign Up</Link>
           </li>,
         ]
       ) : (
-        <li>
+        <li key='Logout li'>
           <button type='button' onClick={logout}>
             Logout
           </button>

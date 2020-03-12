@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable camelcase */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import * as actions from '../actions/actions';
@@ -14,24 +17,30 @@ class GroupContainer extends Component {
   // }
 
   componentDidMount() {
-    Promise.all([
-      fetch(`/offer/${this.props.group_id}`),
-      fetch(`/need/${this.props.group_id}`),
-    ])
-      .then((offerVals, needVals) => {
-        return Promise.all([offerVals.json, needVals.json()]);
-      })
-      .then((offerVals, needVals) => {
-        console.log('offerVals', offerVals);
-        console.log('needVals', needVals);
-      });
+    const fetchOffers = async () => {
+      const { group_id } = this.props;
+      const res = await fetch(`/offer/${group_id}`);
+      // const offers = await res.json();
+      console.log(res);
+    }
+    fetchOffers();
+    // Promise.all([
+    //   fetch(`/offer/${group_id}`),
+    //   fetch(`/need/${group_id}`),
+    // ])
+    //   .then(values => values.forEach(value => console.log(value)))
+    //   .then(([offerVals, needVals]) => {
+    //     console.log('offerVals', offerVals);
+    //     console.log('needVals', needVals);
+    //   });
   }
 
   render() {
     return (
       <div className='group-box'>
-        <div id='offers'>{offers}</div>
-        <div id='needs'>{needs}</div>
+        Group Container
+        {/* <div id='offers'>{offers}</div>
+        <div id='needs'>{needs}</div> */}
       </div>
     );
   }
