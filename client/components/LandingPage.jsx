@@ -5,7 +5,7 @@ export default function LandingPage() {
   return (
     <div>
       <h1>Landing Page</h1>
-      <Group />
+      <Group group_id={1} />
     </div>
   );
 }
