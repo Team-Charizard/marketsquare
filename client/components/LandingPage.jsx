@@ -1,11 +1,11 @@
 import React from 'react';
-import GroupContainer from './GroupContainer';
+import Group from './Group';
 
 export default function LandingPage() {
   return (
     <div>
       <h1>Landing Page</h1>
-      <GroupContainer group_id={1} />
+      <Group />
     </div>
   );
 }
