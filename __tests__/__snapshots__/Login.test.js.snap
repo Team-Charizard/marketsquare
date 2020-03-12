@@ -24,18 +24,14 @@ exports[`Login unit tests snapshot test 1`] = `
         name="password"
         onChange={[Function]}
         placeholder="password"
-        type="text"
+        type="password"
       />
-      <Link
-        to="/LandingPage"
+      <button
+        id="login-button"
+        type="submit"
       >
-        <button
-          id="login-button"
-          type="submit"
-        >
-          Login
-        </button>
-      </Link>
+        Login
+      </button>
       <Link
         to="/Createuser"
       >

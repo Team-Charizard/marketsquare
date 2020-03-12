@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Login from '../client/components/login';
+import { Login } from '../client/components/login';
 
 describe('Login unit tests', () => {
   let wrapper;

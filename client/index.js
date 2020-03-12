@@ -7,6 +7,7 @@ import { store } from './store';
 import App from './App.jsx';
 // reminder to get scss or css in here
 import './styles/login.css';
+import './styles/group.css';
 import './styles/applications.scss';
 
 render(

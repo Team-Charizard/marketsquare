@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   createAccount: credentials => dispatch(actions.createAccount(credentials)),
 });
 
-class CreateUser extends Component {
+export class CreateUser extends Component {
   // want to have functionality to grab and change user data
   constructor(props) {
     super(props);
