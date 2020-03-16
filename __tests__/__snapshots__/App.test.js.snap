@@ -2,10 +2,18 @@
 
 exports[`App unit tests Snapshot Test 1`] = `
 <div>
-  <Connect(MainContainer) />
+  <Connect(withRouter(MainContainer)) />
   <Switch>
     <Route
-      component={[Function]}
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Login)",
+          "type": [Function],
+        }
+      }
       exact={true}
       path="/"
     />

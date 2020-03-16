@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CreateUser from '../client/components/createUser';
+import { CreateUser } from '../client/components/createUser';
 
-xdescribe('CreateUser unit tests', () => {
+describe('CreateUser unit tests', () => {
   let wrapper;
   const props = {
     isFetching: false,

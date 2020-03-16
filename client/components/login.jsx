@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   loginUser: credentials => dispatch(actions.loginUser(credentials)),
 });
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {

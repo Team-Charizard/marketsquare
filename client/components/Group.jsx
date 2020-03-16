@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from '../styles/group.css';
 
 class Group extends Component {
   constructor(props) {
