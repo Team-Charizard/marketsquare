@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App unit tests Snapshot Test 1`] = `
+<div>
+  <Connect(withRouter(MainContainer)) />
+  <Switch>
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(Login)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/LandingPage"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(CreateUser)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/CreateUser"
+    />
+  </Switch>
+</div>
+`;

@@ -4,9 +4,15 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devServer: {
     publicPath: '/build/',
-    // add proxy later
+    port: 8080,
     compress: true,
     historyApiFallback: true,
+    proxy: {
+      '/offer': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
+      '/need': 'http://localhost:3000',
+      '/group': 'http://localhost:3000',
+    },
   },
 
   entry: path.resolve(__dirname, './client/index.js'),
@@ -28,12 +34,16 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/transform-async-to-generator',
+            ],
           },
         },
       },
       {
         // rule for css
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
